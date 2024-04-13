@@ -2,6 +2,7 @@ import { Sun } from "lucide-react"
 import Image from "next/image"
 import { Button } from "./ui/button"
 import Link from "next/link"
+import Github from "./icons/github"
 
 export default function Header() {
 	return (
@@ -15,7 +16,7 @@ export default function Header() {
 				</Button>
 				<Button className="flex gap-3">
 					Log in
-					<Image src="/icons/github.svg" alt="Vercel Logo" width={22} height={22} priority />
+					<Github />
 				</Button>
 			</div>
 		</nav>
