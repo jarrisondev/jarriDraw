@@ -9,7 +9,7 @@ export default function Layout({
 	return (
 		<main className="border border-red-50 max-w-7xl mx-auto flex flex-col justify-between min-h-screen p-5">
 			<Header />
-			{children}
+			<section className="flex-1">{children}</section>
 			<Footer />
 		</main>
 	)
