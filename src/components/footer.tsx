@@ -4,7 +4,7 @@ import { Icons } from "./icons"
 
 export default function Footer() {
 	return (
-		<footer className="flex flex-col justify-center items-center text-[#8D8D8D] font-light">
+		<footer className="flex flex-col justify-center items-center dark:text-[#8D8D8D] text-black font-light">
 			<p className="flex gap-1 items-center">
 				Made with
 				<Heart color="red" fill="red" size="20" />
