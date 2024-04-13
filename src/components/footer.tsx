@@ -1,7 +1,6 @@
 import { Heart, Sun, Twitter } from "lucide-react"
 import Image from "next/image"
-import { Button } from "./ui/button"
-import Github from "./icons/github"
+import { Icons } from "./icons"
 
 export default function Footer() {
 	return (
@@ -14,12 +13,12 @@ export default function Footer() {
 			<a href="http://jarrison.dev" target="_blank" rel="noopener noreferrer" className="underline">
 				Jarrison Cano
 			</a>
-			<span className="flex gap-2 mt-2">
+			<span className="flex gap-2 mt-2 items-center">
 				<a href="https://twitter.jarrison.dev/" target="_blank" rel="noopener noreferrer">
-					<Twitter />
+					<Icons.twitter className="h-5 w-5" />
 				</a>
 				<a href="https://github.jarrison.dev/" target="_blank" rel="noopener noreferrer">
-					<Github />
+					<Icons.gitHub className="h-5 w-5" />
 				</a>
 			</span>
 		</footer>

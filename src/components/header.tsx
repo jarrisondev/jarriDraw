@@ -2,7 +2,7 @@ import { Sun } from "lucide-react"
 import Image from "next/image"
 import { Button } from "./ui/button"
 import Link from "next/link"
-import Github from "./icons/github"
+import { Icons } from "./icons"
 
 export default function Header() {
 	return (
@@ -16,7 +16,7 @@ export default function Header() {
 				</Button>
 				<Button className="flex gap-3">
 					Log in
-					<Github />
+					<Icons.gitHub className="h-5 w-5" />
 				</Button>
 			</div>
 		</nav>
