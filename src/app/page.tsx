@@ -20,7 +20,7 @@ export default function Home() {
 				<div className="mb-44 text-center flex flex-col items-center gap-3">
 					<h1 className="font-extrabold text-7xl">
 						Next-Level <br />{" "}
-						<span className="bg-gradient-to-r from-[#FF0000] from-15% to-[#FF8A00] text-transparent bg-clip-text">
+						<span className="bg-gradient-to-r from-cInitialGradient from-15% to-cFinalGradient text-transparent bg-clip-text">
 							Excalidraw
 						</span>{" "}
 						experience
