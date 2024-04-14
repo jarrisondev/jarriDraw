@@ -20,6 +20,8 @@ const config = {
 		extend: {
 			colors: {
 				cGray: "#8D8D8D",
+				cInitialGradient: "#FF0000",
+				cFinalGradient: "#FF8A00",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
