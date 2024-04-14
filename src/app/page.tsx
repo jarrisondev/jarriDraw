@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons"
-import Layout from "@/components/layout"
+import Layout from "@/components/Layout/layout"
 import { Button } from "@/components/ui/button"
 
 export default function Home() {

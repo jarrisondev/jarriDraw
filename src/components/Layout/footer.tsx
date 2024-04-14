@@ -1,6 +1,6 @@
 import { Heart, Sun, Twitter } from "lucide-react"
 import Image from "next/image"
-import { Icons } from "./icons"
+import { Icons } from "../icons"
 
 export default function Footer() {
 	return (

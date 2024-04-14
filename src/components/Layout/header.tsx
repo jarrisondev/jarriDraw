@@ -1,9 +1,9 @@
 import { Sun } from "lucide-react"
 import Image from "next/image"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import Link from "next/link"
-import { Icons } from "./icons"
-import { ModeToggle } from "./ui/modeToggle"
+import { Icons } from "../icons"
+import { ModeToggle } from "../ui/modeToggle"
 
 export default function Header() {
 	return (
