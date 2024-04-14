@@ -1,3 +1,5 @@
+"use client"
+
 import HomeCard from "@/components/Home/homeCard"
 import { Icons } from "@/components/icons"
 import Layout from "@/components/Layout/layout"

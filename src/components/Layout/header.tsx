@@ -1,22 +1,39 @@
-import { Sun } from "lucide-react"
-import Image from "next/image"
-import { Button } from "../ui/button"
 import Link from "next/link"
 import { Icons } from "../icons"
+import { Button } from "../ui/button"
 import { ModeToggle } from "../ui/modeToggle"
+import UserAvatar from "../shared/userAvatar"
+import { useGetCurrentUser, useSignInWithGitHub } from "@/queries/login"
 
 export default function Header() {
+	const getCurrentUser = useGetCurrentUser()
+	const signInWithGitHub = useSignInWithGitHub()
+
+	const user = getCurrentUser.data
+	const loading = getCurrentUser.isLoading || signInWithGitHub.isPending
+
 	return (
 		<nav className="flex justify-between items-center">
 			<Link href="/">
 				<Icons.logo />
 			</Link>
-			<div className="flex items-center gap-5 ">
+			<div className="flex items-center gap-5">
 				<ModeToggle />
-				<Button className="flex gap-3">
-					Log in
-					<Icons.gitHub className="h-5 w-5" />
-				</Button>
+				{user ? (
+					<UserAvatar user={user} />
+				) : (
+					<Button
+						className="flex gap-3"
+						disabled={loading}
+						onClick={() => {
+							signInWithGitHub.mutate()
+						}}
+					>
+						{loading ? "Loading..." : "Log in"}
+
+						<Icons.gitHub className="h-5 w-5" />
+					</Button>
+				)}
 			</div>
 		</nav>
 	)

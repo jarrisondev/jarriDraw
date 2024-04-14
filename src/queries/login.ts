@@ -5,22 +5,23 @@ export function useSignInWithGitHub() {
 	return useMutation({
 		mutationFn: async () => {
 			const supabase = createClient()
-
-			const { data } = await supabase.auth.signInWithOAuth({
+			await supabase.auth.signInWithOAuth({
 				provider: "github",
 			})
-
-			return data
 		},
 	})
 }
 
-export async function signOut() {
-	const supabase = createClient()
+export function useSignOut() {
+	return useMutation({
+		mutationFn: async () => {
+			const supabase = createClient()
 
-	const { error } = await supabase.auth.signOut()
-
-	return { error }
+			const { error } = await supabase.auth.signOut()
+			window.location.reload()
+			return { error }
+		},
+	})
 }
 
 export function useGetCurrentUser() {
