@@ -8,6 +8,7 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { useSignOut } from "@/queries/login"
+import Link from "next/link"
 
 interface Props {
 	user: User
@@ -27,7 +28,9 @@ export default function UserAvatar({ user }: Props) {
 				</span>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => {}}>Profile</DropdownMenuItem>
+				<Link href="/boards">
+					<DropdownMenuItem>My board</DropdownMenuItem>
+				</Link>
 				<DropdownMenuItem onClick={() => {}}>Settings</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
