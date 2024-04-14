@@ -21,7 +21,7 @@ export default function HomeCard({ title, description, imageUrl, reverse, classN
 				alt="Image of preview"
 				width={550}
 				height={500}
-				className="w-auto h-auto"
+				className="w-auto h-auto drop-shadow-[0_0_30px_rgba(255,107,0,0.12)]"
 				priority
 			/>
 			<div className="flex flex-col gap-14">
