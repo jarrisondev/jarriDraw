@@ -5,7 +5,11 @@ import { ModeToggle } from "../ui/modeToggle"
 import UserAvatar from "../shared/userAvatar"
 import { useGetCurrentUser, useSignInWithGitHub } from "@/queries/login"
 
-export default function Header() {
+interface Props {
+	slot?: React.ReactNode
+}
+
+export default function Header({ slot }: Props) {
 	const getCurrentUser = useGetCurrentUser()
 	const signInWithGitHub = useSignInWithGitHub()
 
@@ -18,6 +22,7 @@ export default function Header() {
 				<Icons.logo />
 			</Link>
 			<div className="flex items-center gap-5">
+				{slot}
 				<ModeToggle />
 				{user ? (
 					<UserAvatar user={user} />
