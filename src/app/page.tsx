@@ -1,9 +1,19 @@
-import HomeCard from "@/components/Home/homeCard"
+"use client"
 import { Icons } from "@/components/icons"
 import Layout from "@/components/Layout/layout"
 import { Button } from "@/components/ui/button"
+import HomeCard from "@/components/Home/homeCard"
+import { useGetCurrentUser, useSignInWithGitHub } from "@/queries/login"
+import Link from "next/link"
 
 export default function Home() {
+	const getCurrentUser = useGetCurrentUser()
+
+	const signInWithGitHub = useSignInWithGitHub()
+
+	const user = getCurrentUser.data
+	const loading = getCurrentUser.isLoading || signInWithGitHub.isPending
+
 	return (
 		<Layout>
 			<div className="my-36">
@@ -19,14 +29,27 @@ export default function Home() {
 						Unlock your creativity with our advanced Excalidraw tool. Save, manage, and share
 						multiple boards effortlessly.
 					</p>
-					<Button
-						size="lg"
-						variant="outline"
-						className="mt-7 flex gap-3 text-base dark:bg-[#222] dark:hover:bg-[#1a1a1a] border-[#4E4E4E]"
-					>
-						<Icons.gitHub className="h-5 w-5" />
-						Continue with GitHub
-					</Button>
+
+					{user ? (
+						<Link href="/draws">
+							<Button size="lg" className="mt-7 flex gap-3 text-base">
+								Continue to my draws
+							</Button>
+						</Link>
+					) : (
+						<Button
+							size="lg"
+							disabled={loading}
+							variant="outline"
+							className="mt-7 flex gap-3 text-base dark:bg-[#222] dark:hover:bg-[#1a1a1a] border-[#4E4E4E]"
+							onClick={() => {
+								signInWithGitHub.mutate()
+							}}
+						>
+							<Icons.gitHub className="h-5 w-5" />
+							{loading ? "Loading..." : "Continue with GitHub"}
+						</Button>
+					)}
 				</div>
 				<section className="flex flex-col gap-44 mt-52">
 					<HomeCard

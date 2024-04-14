@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Icons } from "@/components/icons"
+import { ReactQueryClientProvider } from "@/components/reactQueryClientProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -17,17 +17,24 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en">
-			<head>
-				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/next.svg" />
-			</head>
-			<body className={inter.className}>
-				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-					{children}
-				</ThemeProvider>
-			</body>
-		</html>
+		<ReactQueryClientProvider>
+			<html lang="en" suppressHydrationWarning>
+				<head>
+					<meta charSet="utf-8" />
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
+					<link rel="icon" href="/next.svg" />
+				</head>
+				<body className={inter.className}>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</body>
+			</html>
+		</ReactQueryClientProvider>
 	)
 }
