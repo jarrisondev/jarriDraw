@@ -9,7 +9,7 @@ export default function Header() {
 	return (
 		<nav className="flex justify-between items-center">
 			<Link href="/">
-				<Image src="/logo.svg" alt="Vercel Logo" width={131} height={64} priority />
+				<Icons.logo />
 			</Link>
 			<div className="flex items-center gap-5 ">
 				<ModeToggle />
