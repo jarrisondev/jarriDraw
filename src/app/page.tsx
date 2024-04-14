@@ -31,7 +31,7 @@ export default function Home() {
 					</p>
 
 					{user ? (
-						<Link href="/draws">
+						<Link href="/boards">
 							<Button size="lg" className="mt-7 flex gap-3 text-base">
 								Continue to my draws
 							</Button>
