@@ -16,7 +16,14 @@ export default function HomeCard({ title, description, imageUrl, reverse, classN
 				"flex-row-reverse": reverse,
 			})}
 		>
-			<Image src={imageUrl} alt="Image of preview" width={550} height={500} />
+			<Image
+				src={imageUrl}
+				alt="Image of preview"
+				width={550}
+				height={500}
+				className="w-auto h-auto"
+				priority
+			/>
 			<div className="flex flex-col gap-14">
 				<h3 className="text-5xl font-bold">{title}</h3>
 				<p className="text-lg font-light text-cGray leading-9">{description}</p>
