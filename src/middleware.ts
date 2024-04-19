@@ -1,5 +1,6 @@
 import { type NextRequest } from "next/server"
 import { updateSession } from "@/utils/supabase/middleware"
+import { routes } from "@/utils/routes"
 
 export async function middleware(request: NextRequest) {
 	// update user's auth session
