@@ -5,30 +5,33 @@ export type Database = {
 		Tables: {
 			board: {
 				Row: {
+					cover: string
 					created_at: string
 					data: Json
 					description: string
 					id: string
 					name: string
-					owner_id: string | null
+					owner_id: string
 					updated_at: string
 				}
 				Insert: {
-					created_at?: string
-					data: Json
-					description?: string
-					id?: string
-					name?: string
-					owner_id?: string | null
-					updated_at?: string
-				}
-				Update: {
+					cover?: string
 					created_at?: string
 					data?: Json
 					description?: string
 					id?: string
 					name?: string
-					owner_id?: string | null
+					owner_id?: string
+					updated_at?: string
+				}
+				Update: {
+					cover?: string
+					created_at?: string
+					data?: Json
+					description?: string
+					id?: string
+					name?: string
+					owner_id?: string
 					updated_at?: string
 				}
 				Relationships: [
