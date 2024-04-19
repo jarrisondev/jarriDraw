@@ -18,16 +18,22 @@ interface CardBoardProps extends React.HTMLAttributes<HTMLDivElement> {
 	board: Board | null
 	width?: number
 	height?: number
+	disabled?: boolean
+	handleDelete?: (id: Board["id"]) => void
 }
 
-export function CardBoard({ board, width, height, className, ...props }: CardBoardProps) {
-	const deleteBoard = useDeleteBoard()
+export function CardBoard({
+	board,
+	width,
+	height,
+	className,
+	disabled,
+	handleDelete,
+	...props
+}: CardBoardProps) {
 	const isRemoving = useRef(false)
 
-	if (deleteBoard.isPending) isRemoving.current = true
-	if (deleteBoard.isError) isRemoving.current = false
-
-	return isRemoving.current || board === null ? (
+	return board === null || isRemoving.current ? (
 		<div className={cn("space-y-3 w-[150px]", className)} {...props}>
 			<Skeleton className="h-[150px] w-[150px]" />
 			<Skeleton className="h-4 w-20" />
@@ -50,19 +56,23 @@ export function CardBoard({ board, width, height, className, ...props }: CardBoa
 								)}
 							/>
 						) : (
-							<div className="bg-[#131313] dark:bg-[#1f1f1f] h-[150px] w-[150px] flex items-center justify-center transition-all hover:scale-110">
+							<div className="bg-[#131313] dark:bg-[#1f1f1f] hover:opacity-85 h-[150px] w-[150px] flex items-center justify-center transition-all hover:scale-110">
 								<PencilRuler size={30} className="text-white" />
 							</div>
 						)}
 					</div>
 				</ContextMenuTrigger>
 				<ContextMenuContent className="w-40">
-					<ContextMenuItem>Share</ContextMenuItem>
+					<ContextMenuItem disabled>Share</ContextMenuItem>
 					<ContextMenuItem>Rename</ContextMenuItem>
 					<ContextMenuSeparator />
 					<ContextMenuItem
+						disabled={disabled}
 						onClick={() => {
-							deleteBoard.mutate(board.id)
+							if (handleDelete) {
+								isRemoving.current = true
+								handleDelete(board.id)
+							}
 						}}
 					>
 						Delete
