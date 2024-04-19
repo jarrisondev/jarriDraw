@@ -34,8 +34,7 @@ export default function Header({ slot }: Props) {
 							signInWithGitHub.mutate()
 						}}
 					>
-						{loading ? "Loading..." : "Log in"}
-
+						Log in
 						<Icons.gitHub className="h-5 w-5" />
 					</Button>
 				)}

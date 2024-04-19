@@ -1,4 +1,4 @@
-import { User } from "@supabase/supabase-js"
+import { User } from "../../../types"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {
 	DropdownMenu,
@@ -21,8 +21,8 @@ export default function UserAvatar({ user }: Props) {
 			<DropdownMenuTrigger asChild>
 				<span className="cursor-pointer">
 					<Avatar>
-						<AvatarImage src={user.user_metadata.avatar_url ?? ""} />
-						<AvatarFallback>{user.user_metadata.name ?? ""}</AvatarFallback>
+						<AvatarImage src={user.avatar_url ?? ""} />
+						<AvatarFallback>{user.name ?? ""}</AvatarFallback>
 					</Avatar>
 					<span className="sr-only">Toggle theme</span>
 				</span>

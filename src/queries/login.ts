@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/client"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import { User } from "../../types"
 
 export function useSignInWithGitHub() {
 	return useMutation({
@@ -30,8 +31,11 @@ export function useGetCurrentUser() {
 		queryFn: async () => {
 			const supabase = createClient()
 			const { data } = await supabase.auth.getUser()
+			if (!data.user?.id) return null
+			const response = await supabase.from("profiles").select().eq("id", data.user.id)
 
-			return data.user
+			const user: User | null = response.data?.[0] ?? null
+			return user
 		},
 	})
 }
