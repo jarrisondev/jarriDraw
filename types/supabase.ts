@@ -1,7 +1,114 @@
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
+
 export type Database = {
 	public: {
 		Tables: {
-			[_ in never]: never
+			board: {
+				Row: {
+					created_at: string
+					data: Json
+					description: string
+					id: string
+					name: string
+					owner_id: string | null
+					updated_at: string
+				}
+				Insert: {
+					created_at?: string
+					data: Json
+					description?: string
+					id?: string
+					name?: string
+					owner_id?: string | null
+					updated_at?: string
+				}
+				Update: {
+					created_at?: string
+					data?: Json
+					description?: string
+					id?: string
+					name?: string
+					owner_id?: string | null
+					updated_at?: string
+				}
+				Relationships: [
+					{
+						foreignKeyName: "public_board_owner_id_fkey"
+						columns: ["owner_id"]
+						isOneToOne: false
+						referencedRelation: "profiles"
+						referencedColumns: ["id"]
+					}
+				]
+			}
+			board_user: {
+				Row: {
+					board_id: string | null
+					created_at: string
+					id: number
+					user_id: string | null
+				}
+				Insert: {
+					board_id?: string | null
+					created_at?: string
+					id?: number
+					user_id?: string | null
+				}
+				Update: {
+					board_id?: string | null
+					created_at?: string
+					id?: number
+					user_id?: string | null
+				}
+				Relationships: [
+					{
+						foreignKeyName: "public_board_user_board_id_fkey"
+						columns: ["board_id"]
+						isOneToOne: false
+						referencedRelation: "board"
+						referencedColumns: ["id"]
+					},
+					{
+						foreignKeyName: "public_board_user_user_id_fkey"
+						columns: ["user_id"]
+						isOneToOne: false
+						referencedRelation: "profiles"
+						referencedColumns: ["id"]
+					}
+				]
+			}
+			profiles: {
+				Row: {
+					description: string | null
+					email: string | null
+					id: string
+					language: string | null
+					name: string | null
+				}
+				Insert: {
+					description?: string | null
+					email?: string | null
+					id: string
+					language?: string | null
+					name?: string | null
+				}
+				Update: {
+					description?: string | null
+					email?: string | null
+					id?: string
+					language?: string | null
+					name?: string | null
+				}
+				Relationships: [
+					{
+						foreignKeyName: "profiles_id_fkey"
+						columns: ["id"]
+						isOneToOne: true
+						referencedRelation: "users"
+						referencedColumns: ["id"]
+					}
+				]
+			}
 		}
 		Views: {
 			[_ in never]: never
