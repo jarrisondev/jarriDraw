@@ -10,9 +10,10 @@ import {
 } from "../ui/context-menu"
 import { PencilRuler } from "lucide-react"
 import { Board } from "../../../types"
-import { useDeleteBoard } from "@/queries/boards"
 import { Skeleton } from "../ui/skeleton"
 import { useRef } from "react"
+import { useRouter } from "next/navigation"
+import { routes } from "@/utils/routes"
 
 interface CardBoardProps extends React.HTMLAttributes<HTMLDivElement> {
 	board: Board | null
@@ -32,6 +33,11 @@ export function CardBoard({
 	...props
 }: CardBoardProps) {
 	const isRemoving = useRef(false)
+	const router = useRouter()
+
+	const handleClick = (id: string) => () => {
+		router.push(routes.board(id))
+	}
 
 	return board === null || isRemoving.current ? (
 		<div className={cn("space-y-3 w-[150px]", className)} {...props}>
@@ -40,10 +46,14 @@ export function CardBoard({
 			<Skeleton className="h-3 w-16" />
 		</div>
 	) : (
-		<div className={cn("space-y-3 w-[150px] cursor-pointer", className)} {...props}>
+		<div
+			className={cn("space-y-3 w-[150px] cursor-pointer", className)}
+			onClick={handleClick(board.id)}
+			{...props}
+		>
 			<ContextMenu>
 				<ContextMenuTrigger>
-					<div className="overflow-hidden rounded-md">
+					<div className="overflow-hidden rounded-md hover:opacity-85">
 						{board?.cover ? (
 							<Image
 								src={board.cover}
@@ -56,7 +66,7 @@ export function CardBoard({
 								)}
 							/>
 						) : (
-							<div className="bg-[#131313] dark:bg-[#1f1f1f] hover:opacity-85 h-[150px] w-[150px] flex items-center justify-center transition-all hover:scale-110">
+							<div className="bg-[#131313] dark:bg-[#1f1f1f]  h-[150px] w-[150px] flex items-center justify-center transition-all hover:scale-110">
 								<PencilRuler size={30} className="text-white" />
 							</div>
 						)}
