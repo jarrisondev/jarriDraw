@@ -75,6 +75,12 @@ export default function Boards() {
 					</div>
 				</div>
 				<div className="flex mt-10 gap-10">
+					{boards.data?.length === 0 && !isCreating.current && (
+						<p className="text-lg font-light">
+							You haven&apos;t created any boards yet. Click on the button above to create a new
+						</p>
+					)}
+
 					{boards.isLoading && !boards.data
 						? Array.from({ length: 4 }).map((_, index) => (
 								<CardBoard key={index} board={null} width={300} height={300} />
