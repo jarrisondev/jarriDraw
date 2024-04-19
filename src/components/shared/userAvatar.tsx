@@ -1,3 +1,4 @@
+import { routes } from "@/utils/routes"
 import { User } from "../../../types"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {
@@ -28,7 +29,7 @@ export default function UserAvatar({ user }: Props) {
 				</span>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<Link href="/boards">
+				<Link href={routes.boards}>
 					<DropdownMenuItem>My board</DropdownMenuItem>
 				</Link>
 				<DropdownMenuItem onClick={() => {}}>Settings</DropdownMenuItem>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import HomeCard from "@/components/Home/homeCard"
 import { useGetCurrentUser, useSignInWithGitHub } from "@/queries/login"
 import Link from "next/link"
+import { routes } from "@/utils/routes"
 
 export default function Home() {
 	const getCurrentUser = useGetCurrentUser()
@@ -31,7 +32,7 @@ export default function Home() {
 					</p>
 
 					{user ? (
-						<Link href="/boards">
+						<Link href={routes.boards}>
 							<Button size="lg" className="mt-7 flex gap-3 text-base">
 								Continue to my board
 							</Button>

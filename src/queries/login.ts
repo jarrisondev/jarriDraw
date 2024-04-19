@@ -32,9 +32,9 @@ export function useGetCurrentUser() {
 			const supabase = createClient()
 			const { data } = await supabase.auth.getUser()
 			if (!data.user?.id) return null
-			const response = await supabase.from("profiles").select().eq("id", data.user.id)
+			const response = await supabase.from("profiles").select().eq("id", data.user.id).single()
 
-			const user: User | null = response.data?.[0] ?? null
+			const user: User | null = response.data ?? null
 			return user
 		},
 	})

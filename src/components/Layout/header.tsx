@@ -4,6 +4,7 @@ import { Button } from "../ui/button"
 import { ModeToggle } from "../ui/modeToggle"
 import UserAvatar from "../shared/userAvatar"
 import { useGetCurrentUser, useSignInWithGitHub } from "@/queries/login"
+import { routes } from "@/utils/routes"
 
 interface Props {
 	slot?: React.ReactNode
@@ -18,7 +19,7 @@ export default function Header({ slot }: Props) {
 
 	return (
 		<nav className="flex justify-between items-center">
-			<Link href="/">
+			<Link href={routes.home}>
 				<Icons.logo />
 			</Link>
 			<div className="flex items-center gap-5">
