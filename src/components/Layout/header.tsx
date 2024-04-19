@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
+import { routes } from "@/utils/routes"
+import { Skeleton } from "../ui/skeleton"
 import { ModeToggle } from "../ui/modeToggle"
 import UserAvatar from "../shared/userAvatar"
 import { useGetCurrentUser, useSignInWithGitHub } from "@/queries/login"
-import { routes } from "@/utils/routes"
 
 interface Props {
 	slot?: React.ReactNode
@@ -27,6 +28,8 @@ export default function Header({ slot }: Props) {
 				<ModeToggle />
 				{user ? (
 					<UserAvatar user={user} />
+				) : loading ? (
+					<Skeleton className="h-10 w-10 rounded-full" />
 				) : (
 					<Button
 						className="flex gap-3"

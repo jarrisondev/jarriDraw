@@ -11,7 +11,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { CirclePlus } from "lucide-react"
 import { InsertBoard } from "../../../types"
 import { useCreateBoard, useGetUserBoards } from "@/queries/boards"
@@ -20,10 +20,18 @@ export type SortType = "alphabetical" | "dateCreated" | "lastViewed"
 export type ViewType = "grid" | "list"
 
 export default function Boards() {
-	const createBoard = useCreateBoard()
+	const isCreating = useRef(false)
 	const boards = useGetUserBoards()
+	const createBoard = useCreateBoard()
+	const boardsLength = useRef(boards.data?.length ?? 0)
 	const [viewType, setViewType] = useState<ViewType>("grid")
 	const [sortType, setSortType] = useState<SortType>("lastViewed")
+
+	if (createBoard.isPending) isCreating.current = true
+	if (boards.isSuccess && boards.data?.length !== boardsLength.current) {
+		boardsLength.current = boards.data?.length ?? 0
+		isCreating.current = false
+	}
 
 	const createNewBoard = () => {
 		const newBoard: InsertBoard = {
@@ -65,9 +73,14 @@ export default function Boards() {
 					</div>
 				</div>
 				<div className="flex mt-10 gap-10">
-					{boards.data?.map((board, index) => (
-						<CardBoard key={index} board={board} width={300} height={300} />
-					))}
+					{boards.isLoading && !boards.data
+						? Array.from({ length: 4 }).map((_, index) => (
+								<CardBoard key={index} board={null} width={300} height={300} />
+						  ))
+						: boards.data?.map((board, index) => (
+								<CardBoard key={index} board={board} width={300} height={300} />
+						  ))}
+					{isCreating.current && <CardBoard board={null} width={300} height={300} />}
 				</div>
 			</div>
 		</Layout>

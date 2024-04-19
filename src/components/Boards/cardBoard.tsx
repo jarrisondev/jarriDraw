@@ -11,18 +11,30 @@ import {
 import { PencilRuler } from "lucide-react"
 import { Board } from "../../../types"
 import { useDeleteBoard } from "@/queries/boards"
+import { Skeleton } from "../ui/skeleton"
+import { useRef } from "react"
 
 interface CardBoardProps extends React.HTMLAttributes<HTMLDivElement> {
-	board: Board
+	board: Board | null
 	width?: number
 	height?: number
 }
 
 export function CardBoard({ board, width, height, className, ...props }: CardBoardProps) {
 	const deleteBoard = useDeleteBoard()
+	const isRemoving = useRef(false)
 
-	return (
+	if (deleteBoard.isPending) isRemoving.current = true
+	if (deleteBoard.isError) isRemoving.current = false
+
+	return isRemoving.current || board === null ? (
 		<div className={cn("space-y-3 w-[150px]", className)} {...props}>
+			<Skeleton className="h-[150px] w-[150px]" />
+			<Skeleton className="h-4 w-20" />
+			<Skeleton className="h-3 w-16" />
+		</div>
+	) : (
+		<div className={cn("space-y-3 w-[150px] cursor-pointer", className)} {...props}>
 			<ContextMenu>
 				<ContextMenuTrigger>
 					<div className="overflow-hidden rounded-md">
