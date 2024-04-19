@@ -9,20 +9,24 @@ import {
 	ContextMenuTrigger,
 } from "../ui/context-menu"
 import { PencilRuler } from "lucide-react"
+import { Board } from "../../../types"
+import { useDeleteBoard } from "@/queries/boards"
 
 interface CardBoardProps extends React.HTMLAttributes<HTMLDivElement> {
-	board: any
+	board: Board
 	width?: number
 	height?: number
 }
 
 export function CardBoard({ board, width, height, className, ...props }: CardBoardProps) {
+	const deleteBoard = useDeleteBoard()
+
 	return (
 		<div className={cn("space-y-3 w-[150px]", className)} {...props}>
 			<ContextMenu>
 				<ContextMenuTrigger>
 					<div className="overflow-hidden rounded-md">
-						{board.cover ? (
+						{board?.cover ? (
 							<Image
 								src={board.cover}
 								alt={board.name}
@@ -44,12 +48,20 @@ export function CardBoard({ board, width, height, className, ...props }: CardBoa
 					<ContextMenuItem>Share</ContextMenuItem>
 					<ContextMenuItem>Rename</ContextMenuItem>
 					<ContextMenuSeparator />
-					<ContextMenuItem>Delete</ContextMenuItem>
+					<ContextMenuItem
+						onClick={() => {
+							deleteBoard.mutate(board.id)
+						}}
+					>
+						Delete
+					</ContextMenuItem>
 				</ContextMenuContent>
 			</ContextMenu>
 			<div className="space-y-1 text-sm">
 				<h3 className="font-medium leading-none">{board.name}</h3>
-				<p className="text-xs text-muted-foreground">{board.updatedAt}</p>
+				<p className="text-xs text-muted-foreground">
+					{new Date(board.updated_at).toLocaleDateString()}
+				</p>
 			</div>
 		</div>
 	)
