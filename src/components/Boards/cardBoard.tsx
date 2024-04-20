@@ -83,7 +83,9 @@ export function CardBoard({
 						</span>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
-						<DropdownMenuItem onClick={() => {}}>Shared</DropdownMenuItem>
+						<DropdownMenuItem disabled onClick={() => {}}>
+							Shared
+						</DropdownMenuItem>
 						<DropdownMenuItem onClick={() => {}}>Rename</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem
