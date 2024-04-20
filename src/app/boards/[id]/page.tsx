@@ -4,7 +4,7 @@ import Header from "@/components/Layout/header"
 import { Button } from "@/components/ui/button"
 import { routes } from "@/utils/routes"
 import { useRouter } from "next/navigation"
-import { Excalidraw } from "@excalidraw/excalidraw"
+import { Excalidraw } from "@/components/excalidraw"
 
 export default function Boards({ params }: { params: { id: string } }) {
 	const router = useRouter()
