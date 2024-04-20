@@ -56,12 +56,12 @@ export default function Home() {
 					<HomeCard
 						title="Limitless Drawing"
 						description="Unlock limitless creativity with our powerful Excalidraw editor seamlessly integrated into your workflow. Create dynamic diagrams, sketches, and visual notes with ease."
-						imageUrl="/images/home-1.jpg"
+						imageUrl="/images/home-1.png"
 					/>
 					<HomeCard
 						title="Your Projects, One Click Away"
 						description="View and manage all your boards and projects in a clear, structured manner. Stay on top of your work and enhance your productivity."
-						imageUrl="/images/home-2.jpg"
+						imageUrl="/images/home-2.png"
 						reverse
 					/>
 				</section>
