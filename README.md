@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
 
-## Getting Started
+# JarriDraw
 
-First, run the development server:
+Next-Level Excalidraw experience
+<br />
+Unlock your creativity with our advanced Excalidraw tool. Save, manage, and share multiple boards effortlessly.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![home-1](https://github.com/jarrisondev/jarriDraw/assets/62910118/0de15113-1e8d-445d-9329-d0ae270801d6)
+![home-2](https://github.com/jarrisondev/jarriDraw/assets/62910118/48966c02-7d8f-42ca-8283-0dba4ca260cd)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Getting started
 
-To learn more about Next.js, take a look at the following resources:
+1. clone or fork this repository
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```sh
+   git clone https://github.com/jarrisondev/jarriDraw.git
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. install dependencies
 
-## Deploy on Vercel
+   ```bash
+   pnpm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. run the project
+   ```bash
+   pnpm run dev
+   ```
+4. Open your browser and visit
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   [http://localhost:5175 🌺](http://localhost:5175)
+
+## Contributing to a project
+
+1. **Cloning a fork:**
+   Click on the [_fork_](https://github.com/jarrisondev/jarriDraw/fork) button at the top right corner of the repository to create a copy of the project in your GitHub account.
+2. **Clone the Repository:** Clone your forked repository to your local machine using the command (`git clone <fork URL>`) in your terminal.
+3. **Set upstream branch:** To keep your forked repository updated with the original repository, use the command (`git remote add upstream <repository original URL>`).
+4. **Create branch:** (`git checkout -b feature/some-feature`).
+5. **Stage the changed files:** by using git-add to incrementally "add" changes to the index before using the commit command (`git add <file>`).
+6. **Record changes to the repository:** Create a new commit containing the current contents of the index and the given log message describing the changes(`git commit -m 'Add: some feature'`).
+7. **Submit your Contribution:** Upload your branch with the changes to forked repository on GitHub using (`git push origin feature/some-feature`).
+8. **Generate a request:** To complete the process of creating your PR, simply hit [_pull request_](https://github.com/jarrisondev/jarriDraw/pulls)
+
+## Authors
+
+<a href="https://github.com/jarrisondev">
+   <img width="50px" src="https://avatars.githubusercontent.com/u/62910118?v=4" />
+</a>
+
+### Contribution from Stackblitz
+
+If you want to contribute in a simpler way, you can start this project from _Stackblitz_ using your GitHub account:
+
+[![Open in Stackblitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/jarrisondev/jarriDraw)
+
+**Thanks to all the contributors who have made this project possible!**
+
+[![Contributors](https://contrib.rocks/image?repo=jarrisondev/jarriDraw)](https://github.com/jarrisondev/jarriDraw/graphs/contributors)
+
