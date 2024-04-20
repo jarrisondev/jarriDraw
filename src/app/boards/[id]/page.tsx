@@ -1,10 +1,10 @@
 "use client"
 import { useTheme } from "next-themes"
 import Header from "@/components/Layout/header"
-import { Excalidraw } from "@/components/excalidraw"
 import { Button } from "@/components/ui/button"
 import { routes } from "@/utils/routes"
 import { useRouter } from "next/navigation"
+import { Excalidraw } from "@excalidraw/excalidraw"
 
 export default function Boards({ params }: { params: { id: string } }) {
 	const router = useRouter()
