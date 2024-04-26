@@ -12,7 +12,7 @@ interface Props {
 export default function HomeCard({ title, description, imageUrl, reverse, className }: Props) {
 	return (
 		<div
-			className={cn("flex justify-between items-center gap-16", className, {
+			className={cn("flex justify-between items-center gap-16 flex-col md:flex-row", className, {
 				"flex-row-reverse": reverse,
 			})}
 		>
