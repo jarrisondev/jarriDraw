@@ -73,7 +73,7 @@ export function CardBoard({
 				<div className="space-y-1">
 					<h3 className="font-medium leading-none">{board.name}</h3>
 					<p className="text-xs text-muted-foreground">
-						{new Date(board.updated_at).toLocaleDateString()}
+						{new Date(board.updated_at ?? 0).toLocaleDateString()}
 					</p>
 				</div>
 				<DropdownMenu>
