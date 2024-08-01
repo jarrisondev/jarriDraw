@@ -31,24 +31,26 @@ export default function Boards({ params }: { params: { id: string } }) {
 	useEffect(() => {
 		return () => {
 			if (excalidrawAPI) {
+				console.log("Saving data")
 				const state = excalidrawAPI.getAppState()
 				const elements = excalidrawAPI.getSceneElements()
+				const files = excalidrawAPI.getFiles()
 
 				updateBoardData(
 					{
 						elements,
 						appState: state,
+						files,
 					},
 					id
 				)
 			}
 		}
-	}, [])
+	}, [excalidrawAPI, id])
 
 	useEffect(() => {
-		getBoard(id).then((data: Board) => {
-			console.log(data)
-			if (data) setInitialData(data.boardData)
+		getBoard(id).then((data) => {
+			if (data) setInitialData(data.boardData as ExcalidrawInitialDataState)
 		})
 	}, [id])
 
