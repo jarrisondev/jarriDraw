@@ -3,6 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Board, InsertBoard } from "../../types"
 import { redirect } from "next/navigation"
 import { routes } from "@/utils/routes"
+import { ExcalidrawInitialDataState } from "@excalidraw/excalidraw/types/types"
+import { updateBoardAdapter } from "@/utils/updateBoardAdapter"
 
 export function useCreateBoard() {
 	const queryClient = useQueryClient()
@@ -41,6 +43,14 @@ export function useGetUserBoards() {
 	})
 }
 
+export async function getBoard(id: Board["id"]): Promise<Board | null> {
+	const supabase = createClient()
+	const board = await supabase.from("board").select("*").eq("id", id)
+	const boardData = board?.data?.[0] as Board
+
+	return boardData ?? null
+}
+
 export function useDeleteBoard() {
 	const queryClient = useQueryClient()
 
@@ -53,4 +63,14 @@ export function useDeleteBoard() {
 			queryClient.invalidateQueries({ queryKey: ["boards"] })
 		},
 	})
+}
+
+export async function updateBoardData(data: ExcalidrawInitialDataState, id: Board["id"]) {
+	const supabase = createClient()
+	const dataParsed = updateBoardAdapter(data)
+	return await supabase
+		.from("board")
+		.update({ boardData: dataParsed }, { count: "planned" })
+		.eq("id", id)
+		.select("*")
 }

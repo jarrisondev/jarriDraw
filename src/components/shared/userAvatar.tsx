@@ -8,16 +8,22 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { useSignOut } from "@/queries/login"
+import { useGetCurrentUser, useSignInWithGitHub, useSignOut } from "@/queries/login"
 import Link from "next/link"
+import { Button } from "../ui/button"
+import { Skeleton } from "../ui/skeleton"
+import { Icons } from "../icons"
 
-interface Props {
-	user: User
-}
-
-export default function UserAvatar({ user }: Props) {
+export default function UserAvatar() {
 	const signOut = useSignOut()
-	return (
+
+	const getCurrentUser = useGetCurrentUser()
+	const signInWithGitHub = useSignInWithGitHub()
+
+	const user = getCurrentUser.data
+	const loading = getCurrentUser.isLoading || signInWithGitHub.isPending
+
+	return user ? (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<span className="cursor-pointer">
@@ -43,5 +49,18 @@ export default function UserAvatar({ user }: Props) {
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
+	) : loading ? (
+		<Skeleton className="h-10 w-10 rounded-full" />
+	) : (
+		<Button
+			className="flex gap-3"
+			disabled={loading}
+			onClick={() => {
+				signInWithGitHub.mutate()
+			}}
+		>
+			Log in
+			<Icons.gitHub className="h-5 w-5" />
+		</Button>
 	)
 }

@@ -38,7 +38,6 @@ export default function Boards() {
 	const createNewBoard = () => {
 		const newBoard: InsertBoard = {
 			name: "New Board",
-			data: {},
 		}
 		createBoard.mutate(newBoard)
 	}
