@@ -70,7 +70,7 @@ export async function updateBoardData(data: ExcalidrawInitialDataState, id: Boar
 	const dataParsed = updateBoardAdapter(data)
 	return await supabase
 		.from("board")
-		.update({ boardData: dataParsed }, { count: "planned" })
+		.update({ boardData: dataParsed, updated_at: new Date() })
 		.eq("id", id)
 		.select("*")
 }
