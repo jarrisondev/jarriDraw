@@ -13,6 +13,7 @@ import { useDebounceCallback } from "usehooks-ts"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { ModeToggle } from "@/components/ui/modeToggle"
 import UserAvatar from "@/components/shared/userAvatar"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function Boards({ params }: { params: { id: string } }) {
 	const router = useRouter()
@@ -60,7 +61,9 @@ export default function Boards({ params }: { params: { id: string } }) {
 	return (
 		<div className="flex flex-col h-screen">
 			{initialData === null ? (
-				<div>Loading...</div>
+				<Skeleton className="relative h-full w-full flex items-center justify-center">
+					<p className="">Loading...</p>
+				</Skeleton>
 			) : (
 				<Excalidraw
 					theme={theme}
