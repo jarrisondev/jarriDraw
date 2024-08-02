@@ -10,31 +10,29 @@ import {
 	ExcalidrawInitialDataState,
 } from "@excalidraw/excalidraw/types/types"
 import { useDebounceCallback } from "usehooks-ts"
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { ModeToggle } from "@/components/ui/modeToggle"
 import UserAvatar from "@/components/shared/userAvatar"
-import { Board } from "../../../../types"
 
 export default function Boards({ params }: { params: { id: string } }) {
 	const router = useRouter()
 	const { resolvedTheme } = useTheme()
 	const [initialData, setInitialData] = useState<ExcalidrawInitialDataState | null>(null)
-	const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null)
+	const excalidrawAPIRef = useRef<ExcalidrawImperativeAPI | null>(null)
 
 	const theme = resolvedTheme === "dark" ? "dark" : "light"
 	const id = params.id
 
 	const handleSave = useDebounceCallback((data: ExcalidrawInitialDataState) => {
 		updateBoardData(data, id)
-	}, 5000)
+	}, 4000)
 
-	useEffect(() => {
-		return () => {
-			if (excalidrawAPI) {
-				console.log("Saving data")
-				const state = excalidrawAPI.getAppState()
-				const elements = excalidrawAPI.getSceneElements()
-				const files = excalidrawAPI.getFiles()
+	useLayoutEffect(() => {
+		const saveOnUnmount = () => {
+			if (excalidrawAPIRef.current) {
+				const state = excalidrawAPIRef.current.getAppState()
+				const elements = excalidrawAPIRef.current.getSceneElements()
+				const files = excalidrawAPIRef.current.getFiles()
 
 				updateBoardData(
 					{
@@ -46,7 +44,12 @@ export default function Boards({ params }: { params: { id: string } }) {
 				)
 			}
 		}
-	}, [excalidrawAPI, id])
+
+		return () => {
+			handleSave.cancel()
+			saveOnUnmount()
+		}
+	}, [id, handleSave])
 
 	useEffect(() => {
 		getBoard(id).then((data) => {
@@ -61,7 +64,7 @@ export default function Boards({ params }: { params: { id: string } }) {
 			) : (
 				<Excalidraw
 					theme={theme}
-					excalidrawAPI={(api) => setExcalidrawAPI(api)}
+					excalidrawAPI={(api) => (excalidrawAPIRef.current = api)}
 					isCollaborating={false}
 					initialData={initialData}
 					onChange={(elements, appState, files) => {

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import { routes } from "@/utils/routes"
 import { ExcalidrawInitialDataState } from "@excalidraw/excalidraw/types/types"
 import { updateBoardAdapter } from "@/utils/updateBoardAdapter"
+import { SupabaseClient } from "@supabase/supabase-js"
 
 export function useCreateBoard() {
 	const queryClient = useQueryClient()
