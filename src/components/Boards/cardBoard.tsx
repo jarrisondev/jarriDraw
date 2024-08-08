@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { Ellipsis, PencilRuler } from "lucide-react"
 import { Board } from "../../../types"
 import { Skeleton } from "../ui/skeleton"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { routes } from "@/utils/routes"
 import {
@@ -15,6 +15,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import { RenameBoardDialog } from "./renameBoardDialog"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
 
 interface CardBoardProps extends React.HTMLAttributes<HTMLDivElement> {
 	board: Board | null
@@ -33,14 +35,16 @@ export function CardBoard({
 	handleDelete,
 	...props
 }: CardBoardProps) {
-	const isRemoving = useRef(false)
 	const router = useRouter()
+
+	const [renameBoardDialog, setRenameBoardDialog] = useState(false)
+	const [settingsMenu, setSettingsMenu] = useState(false)
 
 	const handleClick = (id: string) => () => {
 		router.push(routes.board(id))
 	}
 
-	return board === null || isRemoving.current ? (
+	return board === null ? (
 		<div className={cn("space-y-3 w-[150px]", className)} {...props}>
 			<Skeleton className="h-[150px] w-[150px]" />
 			<Skeleton className="h-4 w-20" />
@@ -69,38 +73,67 @@ export function CardBoard({
 					</div>
 				)}
 			</div>
-			<div className="text-sm flex justify-between">
-				<div className="space-y-1">
-					<h3 className="font-medium leading-none">{board.name}</h3>
-					<p className="text-xs text-muted-foreground">
-						{new Date(board.updated_at ?? 0).toLocaleDateString()}
-					</p>
+			<div className="text-sm space-y-1">
+				<div className="flex gap-1">
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<h3 className="flex-1 font-medium  truncate">{board.name}</h3>
+							</TooltipTrigger>
+							<TooltipContent>
+								<p>{board.name}</p>
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
+					<DropdownMenu
+						open={settingsMenu}
+						onOpenChange={(open) => {
+							setSettingsMenu(open)
+						}}
+					>
+						<DropdownMenuTrigger asChild>
+							<span className="cursor-pointer">
+								<Ellipsis size={16} />
+							</span>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end">
+							<DropdownMenuItem disabled onClick={() => {}}>
+								Shared
+							</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={(e) => {
+									setRenameBoardDialog(true)
+									setSettingsMenu(false)
+								}}
+							>
+								Rename
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem
+								onClick={() => {
+									if (handleDelete) {
+										handleDelete(board.id)
+									}
+									setSettingsMenu(false)
+								}}
+							>
+								<p className="text-red-500">Delete</p>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</div>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<span className="cursor-pointer">
-							<Ellipsis size={16} />
-						</span>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DropdownMenuItem disabled onClick={() => {}}>
-							Shared
-						</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => {}}>Rename</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem
-							onClick={() => {
-								if (handleDelete) {
-									isRemoving.current = true
-									handleDelete(board.id)
-								}
-							}}
-						>
-							Delete
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
+				<p className="text-xs text-muted-foreground">
+					{new Date(board.updated_at ?? 0).toLocaleDateString()}
+				</p>
 			</div>
+			<RenameBoardDialog
+				id={board.id}
+				name={board.name}
+				open={renameBoardDialog}
+				onOpenChange={(open) => {
+					setRenameBoardDialog(open)
+				}}
+			/>
 		</div>
 	)
 }

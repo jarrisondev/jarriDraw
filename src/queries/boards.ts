@@ -5,7 +5,6 @@ import { redirect } from "next/navigation"
 import { routes } from "@/utils/routes"
 import { ExcalidrawInitialDataState } from "@excalidraw/excalidraw/types/types"
 import { updateBoardAdapter } from "@/utils/updateBoardAdapter"
-import { SupabaseClient } from "@supabase/supabase-js"
 
 export function useCreateBoard() {
 	const queryClient = useQueryClient()
@@ -74,4 +73,21 @@ export async function updateBoardData(data: ExcalidrawInitialDataState, id: Boar
 		.update({ boardData: dataParsed, updated_at: new Date() })
 		.eq("id", id)
 		.select("*")
+}
+
+export function useUpdateBoardName() {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: async (params: { name: string; id: Board["id"] }) => {
+			const supabase = createClient()
+			await supabase
+				.from("board")
+				.update({ name: params.name, updated_at: new Date() })
+				.eq("id", params.id)
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["boards"] })
+		},
+	})
 }

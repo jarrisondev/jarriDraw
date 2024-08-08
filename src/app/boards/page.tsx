@@ -80,7 +80,7 @@ export default function Boards() {
 						</p>
 					)}
 
-					{boards.isLoading && !boards.data
+					{boards.isLoading
 						? Array.from({ length: 4 }).map((_, index) => (
 								<CardBoard key={index} board={null} width={300} height={300} />
 						  ))
