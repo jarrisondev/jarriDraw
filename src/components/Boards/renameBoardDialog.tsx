@@ -29,6 +29,7 @@ export function RenameBoardDialog({ id, name, open, onOpenChange }: Props) {
 	const handleSave = () => {
 		updateBoardName.mutateAsync({ name: value, id }).then(() => {
 			onOpenChange(false)
+			setValue("")
 		})
 	}
 
