@@ -7,7 +7,7 @@ import { ReactQueryClientProvider } from "@/components/reactQueryClientProvider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-	title: "JarriDraw: Next level excalidraw experience",
+	title: "JarriDraw - Next level excalidraw experience",
 	description:
 		"Unlock your creativity with our advanced Excalidraw tool. Save, manage, and share multiple boards effortlessly.",
 }
