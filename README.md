@@ -59,6 +59,11 @@ If you want to contribute in a simpler way, you can start this project from _Sta
 
 [![Open in Stackblitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/jarrisondev/jarriDraw)
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/jarrisondev/jarriDraw)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jarrisondev/jarriDraw)
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/jarrisondev/jarriDraw)
+
+
 **Thanks to all the contributors who have made this project possible!**
 
 [![Contributors](https://contrib.rocks/image?repo=jarrisondev/jarriDraw)](https://github.com/jarrisondev/jarriDraw/graphs/contributors)
